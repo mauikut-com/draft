@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Documento</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunday</title>
 </head>
 <body>
    
+    <button id="the-button">request ngrok</button>
+
+    <script>
+				function draftFetch() {
+					const url = "http://oddly-chief-duck.ngrok-free.app/events"
+
+					fetch(url, {
+						method: "GET",
+						headers: new Headers({  // ?? warning html skipped but still get cors
+							"ngrok-skip-browser-warning": true
+						})
+
+					}).then((response) => response.json())
+						.then((data) => console.log(data))
+						.catch((err) => console.log(err));
+
+				}
+
+        document.getElementById("the-button").addEventListener("click", draftFetch);
+    </script>
+
 </body>
 </html>
