@@ -15,9 +15,9 @@
 
 					fetch(url, {
 						method: "GET",
-						// headers: new Headers({  // ?? warning html skipped but still get cors
-							// "ngrok-skip-browser-warning": true
-						// })
+						headers: new Headers({  // ?? warning html skipped but still get cors
+							"ngrok-skip-browser-warning": true
+						})
 
 					})
 						.then((response) => {
