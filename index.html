@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunday</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>pwa?</title>
+	<link rel="canonical" href="https://mauikut-com.github.io/draft/" />
+	<link rel="manifest" href="/draft/manifest.webmanifest">
+	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-   
-    <button id="the-button">request ngrok</button>
-
-    <script>
-				function draftFetch() {
-					const url = "http://oddly-chief-duck.ngrok-free.app/events"
-
-					fetch(url, {
-						method: "GET",
-						headers: new Headers({  // ?? warning html skipped but still get cors
-							"ngrok-skip-browser-warning": true
-						})
-
-					})
-						.then((response) => {
-							alert(response)
-							return response.json()
-						})
-						.then((data) => {
-							alert(data)
-						})
-						.catch((err) => {
-							alert(err)
-						});
-
-				}
-
-        document.getElementById("the-button").addEventListener("click", draftFetch);
-    </script>
-
+	<script>
+		if (navigator.serviceWorker) {
+			navigator.serviceWorker.register (
+				'/draft/sw.js',
+				{scope: '/draft/'}
+			)
+		}
+	</script>
+	<script src="js/app.js"></script>
 </body>
 </html>
