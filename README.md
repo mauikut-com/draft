@@ -9,8 +9,10 @@
 
 ## Draft
 
-- migration workflow
+- review mvp schema looking for queue usecase  PICKUP
+- testing queue
 - containerization for development
+- squashing migrations for v1
 
 ```sh
 cp .env.example .env

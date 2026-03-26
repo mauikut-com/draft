@@ -1,6 +1,7 @@
 import './bootstrap';
-
+import { mount } from 'svelte';
 import { registerSW } from 'virtual:pwa-register';
+import App from './App.svelte';
 
 // --- PWA registration ---
 if ('serviceWorker' in navigator) {
@@ -16,41 +17,14 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// --- Hash-based router ---
-const routes = {
-    '#/login': () => import('./pages/login.js'),
-    '#/home': () => import('./pages/home.js'),
-};
+// --- Mount Svelte app ---
+const app = mount(App, {
+    target: document.getElementById('app'),
+});
 
-async function navigate() {
-    const hash = location.hash || '#/login';
-    const loader = routes[hash];
-
-    if (!loader) {
-        location.hash = '#/login';
-        return;
-    }
-
-    const container = document.getElementById('app');
-    container.classList.add('page-exit');
-
-    // Wait for exit animation
-    await new Promise((r) => setTimeout(r, 150));
-
-    const page = await loader();
-    container.classList.remove('page-exit');
-    container.classList.add('page-enter');
-    page.render(container);
-
-    // Clean up enter class after animation
-    setTimeout(() => container.classList.remove('page-enter'), 300);
-}
-
-window.addEventListener('hashchange', navigate);
-
-// Initial route on page load
+// Set initial route
 if (!location.hash) {
     location.hash = '#/login';
-} else {
-    navigate();
 }
+
+export default app;
